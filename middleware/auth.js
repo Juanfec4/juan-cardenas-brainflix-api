@@ -5,7 +5,7 @@ const middleware = new express.Router();
 
 //Check if API key is present and valid
 middleware.use((req, res, next) => {
-  if (req.path == "/register") return next();
+  if (req.path === "/register") return next();
 
   let API_KEY = null;
 

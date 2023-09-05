@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import ip from "ip";
 
@@ -11,13 +12,17 @@ import registerRouter from "./routes/register.js";
 import videoRouter from "./routes/video.js";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 app.use(CORS);
 app.use(express.json());
 app.use("/", logger);
+
 // Auth is disabled for this sprint, although I did implement it.
 // app.use("/", auth);
+
+//Static images
+app.use(express.static("public"));
 
 //Routers
 app.use("/register", registerRouter);

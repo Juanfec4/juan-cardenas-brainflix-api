@@ -1,5 +1,6 @@
 import jsonService from "../utils/jsonService.js";
 import { randomUUID } from "crypto";
+import ip from "ip";
 
 //Mock data for post requests
 const defaultVideoData = {
@@ -8,8 +9,9 @@ const defaultVideoData = {
   duration: "5:01",
 };
 
-//
+//Constants
 const DB_PATH = "../data/videos.json";
+const BASE_URL = `http://${ip.address()}:${process.env.PORT}`;
 
 //Get videos
 const getVideos = (req, res) => {
@@ -17,7 +19,7 @@ const getVideos = (req, res) => {
   if (data) {
     let videos = data.map((video) => {
       const { id, title, channel, image } = video;
-      return { id, title, channel, image };
+      return { id, title, channel, image: `${BASE_URL}/images/${image}` };
     });
     return res.status(200).json(videos);
   } else {
@@ -34,7 +36,7 @@ const getVideo = (req, res) => {
       return video.id === id;
     });
     if (video) {
-      return res.status(200).json(video);
+      return res.status(200).json({ ...video, image: `${BASE_URL}/images/${video.image}` });
     } else {
       return res.status(400).json({ message: `No video found for id: ${id}.` });
     }
