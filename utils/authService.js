@@ -7,7 +7,7 @@ const KEYS = jsonService.loadJSON(PATH);
 //Creates a new API KEY
 const generateKey = (size = 32, format = "base64") => {
   const buffer = randomBytes(size);
-  return [buffer.toString(format), randomUUID()];
+  return [buffer.toString(format).slice(0, -1), randomUUID()];
 };
 
 //Adds a key to the json file

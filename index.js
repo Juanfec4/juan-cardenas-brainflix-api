@@ -2,6 +2,7 @@ import express from "express";
 import ip from "ip";
 
 //Middleware
+import CORS from "./middleware/cors.js";
 import logger from "./middleware/morgan.js";
 import auth from "./middleware/auth.js";
 
@@ -12,6 +13,7 @@ import videoRouter from "./routes/video.js";
 const app = express();
 const PORT = 3001;
 
+app.use(CORS);
 app.use(express.json());
 app.use("/", logger);
 // Auth is disabled for this sprint, although I did implement it.
