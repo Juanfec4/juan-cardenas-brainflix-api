@@ -4,17 +4,17 @@
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`REACT_APP_API_KEY`
+`PORT`
 
-`REACT_APP_API_URL`
+#### Getting the Project Started
 
-## Getting the Project Started
-
-Install dependencies
+#### Install dependencies
 
 ```bash
   npm install
 ```
+
+#### Run server
 
 ```bash
   npm run start
