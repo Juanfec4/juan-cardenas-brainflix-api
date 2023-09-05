@@ -6,7 +6,7 @@ To run this project, you will need to add the following environment variables to
 
 `PORT`
 
-#### Getting the Project Started
+## Getting the Project Started
 
 #### Install dependencies
 
