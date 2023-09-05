@@ -7,6 +7,8 @@ const defaultVideoData = {
   views: "1,001,023",
   likes: "110,985",
   duration: "5:01",
+  channel: "User Channel",
+  image: "Upload-video-preview.jpg",
 };
 
 //Constants
@@ -46,24 +48,23 @@ const getVideo = (req, res) => {
 //Post video
 const postVideo = (req, res) => {
   const data = jsonService.loadJSON(DB_PATH);
-  const { title, channel, image, description } = req.body;
+  const { title, description } = req.body;
   const newVideo = {
     id: randomUUID(),
     title,
-    channel,
-    image,
     description,
     ...defaultVideoData,
     timestamp: new Date(),
   };
 
   //If some data is missing return an error message
-  for (let key in newVideo) {
+  const keys = ["title", "description"];
+  for (let key of keys) {
     if (!newVideo[key]) {
       return res.status(400).json({ message: `Request body missing ${key}` });
     }
   }
-  //
+  //Add video to json file.
   data.push(newVideo);
   jsonService.writeJSON(DB_PATH, data);
   return res.status(201).json(newVideo);
